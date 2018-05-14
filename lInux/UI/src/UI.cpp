@@ -15,9 +15,17 @@ using namespace std;
 int g_window_width = 1980;
 int g_window_height = 1024;
 
+//
+int InitOpenGL(void);
+
 int main() {
+
+	int OpenGLRet;
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	return 0;
+	OpenGLRet =	InitOpenGL();
+	if (OpenGLRet) 	cout << "Error on OpenGL init!!!" << endl; // prints !!!Hello World!!!
+	return OpenGLRet;
+
 }
 
 int InitOpenGL(void)
@@ -63,7 +71,15 @@ int InitOpenGL(void)
 			GlSetupScene(window, g_window_width, g_window_height);
 
 			do {
-				//GlRender();
+				// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
+				glClear( GL_COLOR_BUFFER_BIT );
+
+				// Draw nothing, see you in tutorial 2 !
+
+
+				// Swap buffers
+				glfwSwapBuffers(window);
+				glfwPollEvents();
 			} // Check if the ESC key was pressed or the window was closed
 			while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(window) == 0);
 
